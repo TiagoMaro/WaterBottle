@@ -1,0 +1,17 @@
+.bottle-icon {
+    background-image: url('./images/bottle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    /* Defina as dimensões do ícone */
+    width: 50px;
+    height: 70px;
+    
+    /* Estilos de layout para os ícones ficarem lado a lado */
+    display: inline-block;
+    margin: 5px;
+    
+    /* Opcional: para esconder o emoji se você estiver usando uma imagem */
+    font-size: 0;
+}
