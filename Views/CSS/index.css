@@ -1,17 +1,202 @@
-.bottle-icon {
+.root {
+    box-sizing: border-box;
+}
+
+:root{
+    --green: #2e8b57; /* sea green */
+    --blue: #1e90ff;  /* dodger blue */
+    --black: #0b0b0b;
+    --white: #ffffff;
+    --grey: #f3f4f6;
+    --muted: #6b7280;
+    --header-height: 64px;
+    --footer-height: 56px;
+}
+
+*{box-sizing: border-box}
+
+body{
+    margin:0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    color:var(--black);
+    background: linear-gradient(180deg, var(--white), var(--grey));
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    /* reserve space for fixed header/footer */
+    padding-top: var(--header-height);
+    padding-bottom: var(--footer-height);
+}
+
+/* Header (top) */
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:var(--header-height);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    gap:12px;
+    background: linear-gradient(90deg, var(--green), var(--blue));
+    color:var(--white);
+    z-index:1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+header button{
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.9);
+    color:var(--white);
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+header button:hover{opacity:0.95}
+
+main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    width:100%;
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px;
+    text-align:center;
+}
+
+/* Input/button styles */
+input[type='number']{
+    padding:10px 12px;
+    border-radius:8px;
+    border:1px solid #d1d5db;
+    width:220px;
+    outline:none;
+}
+
+button[onclick], .primary-btn{
+    background: var(--blue);
+    color:var(--white);
+    border:none;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+button[onclick]:hover, .primary-btn:hover{filter:brightness(0.95)}
+
+.bottle-count, .weight-count, .value-count {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--black);
+    margin: 4px 0;
+}
+
+.calculations {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 0;
+    padding: 12px;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.weight-count {
+    color: var(--green);
+}
+
+.value-count {
+    color: var(--blue);
+}
+
+/* Bottle container: centered, wraps, and visible */
+#bottleContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Changed to flex-start for consistent row alignment */
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+    max-width: 900px;
+    height: 300px; /* Approx 4 rows of 88px bottles + gaps */
+    background: rgba(255,255,255,0.75);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    overflow-y: auto; /* Add vertical scroll when content exceeds height */
+    
+    /* Custom scrollbar styling */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--blue) transparent; /* Firefox */
+}
+
+/* Webkit (Chrome, Safari, Edge) scrollbar styling */
+#bottleContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+#bottleContainer::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+}
+
+#bottleContainer::-webkit-scrollbar-thumb {
+    background: var(--blue);
+    border-radius: 4px;
+}
+
+#bottleContainer::-webkit-scrollbar-thumb:hover {
+    background: var(--green);
+}
+
+/* Bottle icon (image) */
+.bottle-icon{
     background-image: url('./images/bottle.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    
-    /* Defina as dimensões do ícone */
-    width: 50px;
-    height: 70px;
-    
-    /* Estilos de layout para os ícones ficarem lado a lado */
+    width: 64px;
+    height: 88px;
     display: inline-block;
-    margin: 5px;
-    
-    /* Opcional: para esconder o emoji se você estiver usando uma imagem */
-    font-size: 0;
+    margin: 6px;
+    transition: transform 180ms ease, opacity 180ms ease;
+    flex-shrink: 0; /* Prevent bottles from shrinking */
 }
+
+.bottle-icon:hover{transform:translateY(-6px)}
+
+/* Footer fixed to bottom */
+footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:var(--footer-height);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 12px;
+    background: #111;
+    color:var(--white);
+    z-index:900;
+}
+
+/* Small screens adjustments */
+@media (max-width:520px){
+    .bottle-icon{width:48px;height:66px}
+    input[type='number']{width:160px}
+}
+
+/* Muted text */
+.muted{color:var(--muted)}

@@ -32,16 +32,28 @@ function showBottles() {
     // Conta quantos elementos de garrafa estão atualmente renderizados
     const container = document.getElementById('bottleContainer');
     const display = document.getElementById('bottleCount');
-    if (!display || !container) return;
+    const weightDisplay = document.getElementById('weightCount');
+    const valueDisplay = document.getElementById('valueCount');
+    
+    if (!display || !container || !weightDisplay || !valueDisplay) return;
 
     const rendered = container.querySelectorAll('.bottle-icon').length;
+    
+    // Cálculo de peso (20 garrafas = 1kg)
+    const weightKg = rendered / 20;
+    // Cálculo de valor (R$2.70 por kg)
+    const valueReais = weightKg * 2.70;
 
     if (rendered === 0) {
         display.textContent = '0 garrafas';
+        weightDisplay.textContent = '0 kg';
+        valueDisplay.textContent = 'R$ 0,00';
         return;
     }
 
     display.textContent = rendered + (rendered === 1 ? ' garrafa' : ' garrafas');
+    weightDisplay.textContent = weightKg.toFixed(2) + ' kg';
+    valueDisplay.textContent = 'R$ ' + valueReais.toFixed(2).replace('.', ',');
 }
 
 // Inicializa listener para atualização em tempo real quando a página carregar
